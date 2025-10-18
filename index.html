@@ -6,9 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Schulte Grid</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
-    <script async defer src="main.js"></script>
   </head>
-  <body>
+  <body onload="showGrid(5)">
     <!-- header -->
     <header>
       <h1>Schulte Grid</h1>
@@ -16,68 +15,11 @@
     </header>
     <!-- main -->
     <main>
-      <div id="grid2" class="grid hidden">
-        <div class="grid-item" onclick="clickCell(this,2)"></div>
-        <div class="grid-item" onclick="clickCell(this,2)"></div>
-        <div class="grid-item" onclick="clickCell(this,2)"></div>
-        <div class="grid-item" onclick="clickCell(this,2)"></div>
-      </div>
-      <div id="grid3" class="grid hidden">
-        <div class="grid-item" onclick="clickCell(this,3)"></div>
-        <div class="grid-item" onclick="clickCell(this,3)"></div>
-        <div class="grid-item" onclick="clickCell(this,3)"></div>
-        <div class="grid-item" onclick="clickCell(this,3)"></div>
-        <div class="grid-item" onclick="clickCell(this,3)"></div>
-        <div class="grid-item" onclick="clickCell(this,3)"></div>
-        <div class="grid-item" onclick="clickCell(this,3)"></div>
-        <div class="grid-item" onclick="clickCell(this,3)"></div>
-        <div class="grid-item" onclick="clickCell(this,3)"></div>
-      </div>
-      <div id="grid4" class="grid hidden">
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-        <div class="grid-item" onclick="clickCell(this,4)"></div>
-      </div>
-      <div id="grid5" class="grid hidden">
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-        <div class="grid-item" onclick="clickCell(this,5)"></div>
-      </div>
+      <div id="grid3" class="grid hidden"></div>
+      <div id="grid4" class="grid hidden"></div>
+      <div id="grid5" class="grid hidden"></div>
+      <div id="grid6" class="grid hidden"></div>
+      <div id="grid7" class="grid hidden"></div>  
     </main>
     <div id="stopwatch"></div>
     <div id="result">
@@ -87,13 +29,17 @@
     </div>
 
     <!-- footer -->
-    <footer>
-      <div id="navBars">
-        <div id="grid2x2" class="btn" onclick="showGrid(2)">2x2</div>
-        <div id="grid3x3" class="btn" onclick="showGrid(3)">3x3</div>
-        <div id="grid4x4" class="btn" onclick="showGrid(4)">4x4</div>
-        <div id="grid5x5" class="btn" onclick="showGrid(5)">5x5</div>
-      </div>
-    </footer>
+    <div id="navBars">
+      <label for="gridSelector" id="gridLabel">Select Grid Size:</label>
+      <select id="gridSelector" onchange="showGrid(parseInt(this.value))">
+        <option value="3">3x3</option>
+        <option value="4">4x4</option>
+        <option value="5" selected>5x5</option>
+        <option value="6">6x6</option>
+        <option value="7">7x7</option>
+      </select>
+    </div>
+    
+    <script async defer src="main.js"></script>
   </body>
 </html>

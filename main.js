@@ -4,26 +4,40 @@ const getRandomNum = (gridNum) => {
   return indexOfNumArr + 1;
 };
 
-// put the different random numbers into each grid cell
-const setDiffRandomNumToEachCell = (gridNum) => {
-  // debugger;
-  let elem = document.getElementById("grid" + gridNum);
-  let elements = elem.getElementsByClassName("grid-item");
-  let randomNumArr = [];
+const createGridItems = (gridNum) => {
+  const grid = document.getElementById("grid" + gridNum);
+  grid.innerHTML = '';
+  
   for (let i = 0; i < gridNum * gridNum; i++) {
-    let randomNum = getRandomNum(gridNum * gridNum);
-    // if randomNum is in randomNumArr, reget randomNum until it is not in randomNumArr.
-    while (randomNumArr.includes(randomNum)) {
-      randomNum = getRandomNum(gridNum * gridNum);
-    }
-    randomNumArr.push(randomNum);
-
-    elements[i].innerHTML = randomNumArr[i];
+    const gridItem = document.createElement('div');
+    gridItem.className = 'grid-item';
+    gridItem.onclick = () => clickCell(gridItem, gridNum);
+    grid.appendChild(gridItem);
   }
 };
 
-// Comments: simplify this function
+// put the different random numbers into each grid cell
+const setDiffRandomNumToEachCell = (gridNum) => {
+  let elem = document.getElementById("grid" + gridNum);
+  let elements = elem.getElementsByClassName("grid-item");
+  
+  let numbers = [];
+  for (let i = 1; i <= gridNum * gridNum; i++) {
+    numbers.push(i);
+  }
+  
+  for (let i = numbers.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+  }
+  
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].innerHTML = numbers[i];
+  }
+};
+
 const resetGrids = (gridNum) => {
+  createGridItems(gridNum);
   setDiffRandomNumToEachCell(gridNum);
   let elem = document.getElementById("grid" + gridNum);
   let elems = elem.getElementsByClassName("grid-item");
@@ -34,56 +48,24 @@ const resetGrids = (gridNum) => {
   toggleShowOrHide(false);
 };
 
-// click the button to show the correspond grid
 const showGrid = (gridNum) => {
-  // debugger;
-
-  // show 'back to home' button
   document.getElementById("back").classList.remove("hidden");
 
-  //show 'stopwatch'
   document.getElementById("stopwatch").classList.remove("hidden");
 
-  // reset stopwatch
   resetStopwatch();
 
-  let gridId = "grid" + gridNum;
-  switch (gridId) {
-    case "grid2":
-      resetGrids(2);
-      document.getElementById("grid2").classList.remove("hidden");
-      document.getElementById("grid3").classList.add("hidden");
-      document.getElementById("grid4").classList.add("hidden");
-      document.getElementById("grid5").classList.add("hidden");
-      break;
-    case "grid3":
-      resetGrids(3);
-      document.getElementById("grid3").classList.remove("hidden");
-      document.getElementById("grid2").classList.add("hidden");
-      document.getElementById("grid4").classList.add("hidden");
-      document.getElementById("grid5").classList.add("hidden");
-      break;
-    case "grid4":
-      resetGrids(4);
-      document.getElementById("grid4").classList.remove("hidden");
-      document.getElementById("grid2").classList.add("hidden");
-      document.getElementById("grid3").classList.add("hidden");
-      document.getElementById("grid5").classList.add("hidden");
-      break;
-    case "grid5":
-      resetGrids(5);
-      document.getElementById("grid5").classList.remove("hidden");
-      document.getElementById("grid2").classList.add("hidden");
-      document.getElementById("grid3").classList.add("hidden");
-      document.getElementById("grid4").classList.add("hidden");
-      break;
-    default:
-      break;
-  }
-  // hide the grid button
+  document.getElementById("grid3").classList.add("hidden");
+  document.getElementById("grid4").classList.add("hidden");
+  document.getElementById("grid5").classList.add("hidden");
+  document.getElementById("grid6").classList.add("hidden");
+  document.getElementById("grid7").classList.add("hidden");
+
+  resetGrids(gridNum);
+  document.getElementById("grid" + gridNum).classList.remove("hidden");
+
   toggleShowOrHideGridBtn(false);
 
-  // show the stopwatch
   stopwatchElem.innerHTML = `${get2digits(minutes)} : ${get2digits(seconds)}`;
 };
 
@@ -94,7 +76,6 @@ let global = {
   stopwatchElem: document.getElementById("stopwatch"),
 };
 
-// stopwatch: change 1 digit to 2 digits
 let minutes = 0;
 let seconds = 0;
 const get2digits = (num) => {
@@ -105,7 +86,6 @@ const get2digits = (num) => {
   return num;
 };
 
-// toggle stopwatch
 let intervalID;
 let stopwatchElem = document.getElementById("stopwatch");
 const stopwatch = (cellNum, gridNum) => {
@@ -157,14 +137,7 @@ const index = (() => {
 })();
 
 // toggle remove class 'hidden'
-const toggleShowOrHideGridBtn = (isShown) => {
-  const gridBtns = document.querySelectorAll("#navBars > .btn");
-  if (isShown) {
-    gridBtns.forEach((item) => item.classList.remove("hidden"));
-  } else {
-    gridBtns.forEach((item) => item.classList.add("hidden"));
-  }
-};
+const toggleShowOrHideGridBtn = (isShown) => {};
 // toggle 'div#result'
 const toggleShowOrHide = (isshown) => {
   if (isshown) {
@@ -189,59 +162,31 @@ const resetStopwatch = () => {
 // restart game
 const reset = () => {
   let elems = document.getElementsByClassName("grid");
-  // in html collection, elems is an object
-  let currentGrid = [...elems].filter(
-    (e) => ![...e.classList].includes("hidden")
-  );
-  switch (currentGrid[0].id) {
-    case "grid2":
-      resetGrids(2);
-      break;
-    case "grid3":
-      resetGrids(3);
-      break;
-    case "grid4":
-      resetGrids(4);
-      break;
-    case "grid5":
-      resetGrids(5);
-      break;
-    default:
-      break;
+  let currentGrid = [...elems].find(e => !e.classList.contains("hidden"));
+  if (currentGrid) {
+    const gridNum = parseInt(currentGrid.id.replace("grid", ""));
+    resetGrids(gridNum);
   }
-  // toggleShowOrHideGridBtn(false);
   resetStopwatch();
 };
 
 // next level
 const nextLevel = () => {
   let elems = document.getElementsByClassName("grid");
-  // in html collection, elems is an object
-  let currentGrid = [...elems].filter(
-    (e) => ![...e.classList].includes("hidden")
-  );
-  switch (currentGrid[0].id) {
-    case "grid2":
-      resetGrids(2);
-      showGrid(3);
-      break;
-    case "grid3":
-      resetGrids(3);
-      showGrid(4);
-      break;
-    case "grid4":
-      resetGrids(4);
-      showGrid(5);
-      break;
-    default:
-      break;
+  let currentGrid = [...elems].find(e => !e.classList.contains("hidden"));
+  if (currentGrid) {
+    const currentGridNum = parseInt(currentGrid.id.replace("grid", ""));
+    const nextGridNum = currentGridNum + 1;
+    if (nextGridNum <= 7) {
+      showGrid(nextGridNum);
+    }
   }
   resetStopwatch();
 };
 
 // back to home
 const backToHome = () => {
-  // show gridBtn
+  // show grid selector
   toggleShowOrHideGridBtn(true);
   // hide back to home btn
   document.getElementById("back").classList.add("hidden");
@@ -249,16 +194,18 @@ const backToHome = () => {
   document.getElementById("stopwatch").classList.add("hidden");
   // hide result
   toggleShowOrHide(false);
-  // hide grids
-  document.getElementById("grid2").classList.add("hidden");
-  document.getElementById("grid3").classList.add("hidden");
-  document.getElementById("grid4").classList.add("hidden");
-  document.getElementById("grid5").classList.add("hidden");
+  // hide all grids
+  ["grid3", "grid4", "grid5", "grid6", "grid7"].forEach(id => {
+    document.getElementById(id).classList.add("hidden");
+  });
 };
 
-// Stopwatch
-// 1. Press gridBtn (showGrid()), stopwatch is shown
-// 2. Press the FIRST number of the grid to start (clickCell()), time runs
-// 3. Press the LAST number of the grid to finish (clickCell()), time stops
-// 4. Store the time in 'previours result' div
-// 5. Restart, stopwatch is reset
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', function() {
+  // 显示网格选择器
+  toggleShowOrHideGridBtn(true);
+  
+  // 隐藏返回按钮和秒表（初始状态）
+  document.getElementById("back").classList.add("hidden");
+  document.getElementById("stopwatch").classList.add("hidden");
+});

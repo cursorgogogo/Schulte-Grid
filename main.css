@@ -1,8 +1,37 @@
 body {
   width: 80%;
+  max-width: 1200px;
   padding: 30px;
   margin: auto;
   background-color: #333;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    width: 95%;
+    padding: 15px;
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    width: 98%;
+    padding: 10px;
+    overflow-x: hidden;
+  }
+  
+  .grid {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 /* header */
@@ -11,6 +40,20 @@ h1 {
   text-align: center;
   margin: 30px auto;
   text-shadow: 0px 2px 5px rgb(0, 0, 0);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    margin: 20px auto;
+    font-size: 1.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    margin: 15px auto;
+    font-size: 1.5em;
+  }
 }
 
 /* main */
@@ -23,6 +66,22 @@ h1 {
   display: grid;
   grid-gap: 20px;
 }
+
+@media (max-width: 768px) {
+  .grid {
+    padding: 20px;
+    margin: 15px auto;
+    grid-gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    padding: 15px;
+    margin: 10px auto;
+    grid-gap: 10px;
+  }
+}
 #grid2 {
   grid-template-columns: auto auto;
 }
@@ -34,6 +93,12 @@ h1 {
 }
 #grid5 {
   grid-template-columns: auto auto auto auto auto;
+}
+#grid6 {
+  grid-template-columns: auto auto auto auto auto auto;
+}
+#grid7 {
+  grid-template-columns: auto auto auto auto auto auto auto;
 }
 .grid-item {
   width: 100px;
@@ -49,6 +114,146 @@ h1 {
   justify-content: center;
   flex-direction: column;
   cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+/* 6x6网格项样式 */
+#grid6 .grid-item {
+  width: 80px;
+  height: 80px;
+  font-size: 24px;
+}
+
+/* 6x6网格间距调整 */
+#grid6 {
+  grid-gap: 15px;
+}
+
+/* 7x7网格项样式 */
+#grid7 .grid-item {
+  width: 70px;
+  height: 70px;
+  font-size: 20px;
+}
+
+/* 7x7网格间距调整 */
+#grid7 {
+  grid-gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .grid-item {
+    width: 80px;
+    height: 80px;
+    font-size: 28px;
+  }
+  
+  /* 6x6网格移动端样式 */
+  #grid6 .grid-item {
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+  }
+  
+  #grid6 {
+    grid-gap: 12px;
+  }
+  
+  /* 7x7网格移动端样式 */
+  #grid7 .grid-item {
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
+  }
+  
+  #grid7 {
+    grid-gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-item {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+  }
+  
+  /* 6x6网格小屏幕样式 */
+  #grid6 .grid-item {
+    width: 45px;
+    height: 45px;
+    font-size: 14px;
+  }
+  
+  #grid6 {
+    grid-gap: 8px;
+  }
+  
+  /* 7x7网格小屏幕样式 */
+  #grid7 .grid-item {
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  }
+  
+  #grid7 {
+    grid-gap: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .grid-item {
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+  }
+  
+  /* 6x6网格超小屏幕样式 */
+  #grid6 .grid-item {
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
+  }
+  
+  #grid6 {
+    grid-gap: 6px;
+  }
+  
+  /* 7x7网格超小屏幕样式 */
+  #grid7 .grid-item {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+  
+  #grid7 {
+    grid-gap: 4px;
+  }
+  
+  .grid {
+    padding: 10px;
+    margin: 5px auto;
+    grid-gap: 8px;
+  }
+  
+  h1 {
+    font-size: 1.3em;
+    margin: 10px auto;
+  }
+  
+  .btn {
+    padding: 10px 15px;
+    font-size: 11px;
+  }
+  
+  #navBars {
+    margin: 20px auto;
+  }
+  
+  #navBars div {
+    margin: 3px;
+    min-width: 50px;
+  }
 }
 
 #result {
@@ -67,6 +272,39 @@ h1 {
   display: inline;
   margin: 20px;
 }
+
+@media (max-width: 768px) {
+  #result {
+    margin: 30px auto;
+  }
+  #done,
+  #stopwatch {
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+  #restart,
+  #next {
+    margin: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  #result {
+    margin: 20px auto;
+  }
+  #done,
+  #stopwatch {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  #restart,
+  #next {
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+    text-align: center;
+  }
+}
 .btn {
   color: lightblue;
   font-family: Arial, Helvetica, sans-serif;
@@ -79,6 +317,25 @@ h1 {
   cursor: pointer;
   transition-duration: 0.1s;
   box-shadow: 0px 4px 2px #111;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    padding: 15px 25px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: 12px 20px;
+    font-size: 12px;
+    margin: 5px;
+  }
 }
 .btn:hover {
   color: white;
@@ -88,6 +345,18 @@ h1 {
   box-shadow: 0px 0px 2px #111;
   transform: translateY(10px);
   background-color: #111;
+}
+
+@media (max-width: 768px) {
+  .btn:active {
+    transform: translateY(5px);
+    background-color: #111;
+  }
+  
+  .grid-item:active {
+    transform: scale(0.95);
+    background-color: #87CEEB;
+  }
 }
 .hidden {
   display: none !important;
@@ -101,8 +370,79 @@ hr {
 #navBars {
   margin: 60px auto;
   width: fit-content;
+  text-align: center;
 }
-#navBars div {
-  display: inline;
-  margin: 0 30px;
+
+#gridLabel {
+  color: lightblue;
+  font-size: 18px;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+#gridSelector {
+  background-color: #222;
+  color: lightblue;
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#gridSelector:hover {
+  background-color: #333;
+  color: white;
+}
+
+#gridSelector:focus {
+  border-color: #87CEEB;
+  box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
+}
+
+#gridSelector option {
+  background-color: #222;
+  color: lightblue;
+  padding: 5px;
+}
+
+@media (max-width: 768px) {
+  #navBars {
+    margin: 40px auto;
+  }
+  
+  #gridLabel {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  #gridSelector {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  #navBars {
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  #gridLabel {
+    font-size: 14px;
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+  
+  #gridSelector {
+    padding: 10px 15px;
+    font-size: 14px;
+    min-width: 120px;
+  }
 }
