@@ -39,18 +39,11 @@ const setDiffRandomNumToEachCell = (gridNum) => {
 const resetGrids = (gridNum) => {
   createGridItems(gridNum);
   setDiffRandomNumToEachCell(gridNum);
-  let elem = document.getElementById("grid" + gridNum);
-  let elems = elem.getElementsByClassName("grid-item");
-  for (let i = 0; i < elems.length; i++) {
-    elems[i].style.backgroundColor = "lightblue";
-  }
   index(false, true);
   toggleShowOrHide(false);
 };
 
 const showGrid = (gridNum) => {
-  document.getElementById("back").classList.remove("hidden");
-
   document.getElementById("stopwatch").classList.remove("hidden");
 
   resetStopwatch();
@@ -114,7 +107,7 @@ const clickCell = (elem, gridNum) => {
   stopwatch(cellNum, gridNum);
   if (index(false, false) === cellNum) {
     index(true, false);
-    elem.style.backgroundColor = "#fff";
+    elem.style.backgroundColor = "#e6d7c3";
     toggleShowOrHideGridBtn(false);
   }
   if (index(false, false) === gridNum * gridNum + 1) {
@@ -184,28 +177,7 @@ const nextLevel = () => {
   resetStopwatch();
 };
 
-// back to home
-const backToHome = () => {
-  // show grid selector
-  toggleShowOrHideGridBtn(true);
-  // hide back to home btn
-  document.getElementById("back").classList.add("hidden");
-  // hide stopwatch
-  document.getElementById("stopwatch").classList.add("hidden");
-  // hide result
-  toggleShowOrHide(false);
-  // hide all grids
-  ["grid3", "grid4", "grid5", "grid6", "grid7"].forEach(id => {
-    document.getElementById(id).classList.add("hidden");
-  });
-};
-
-// 页面加载时初始化
 document.addEventListener('DOMContentLoaded', function() {
-  // 显示网格选择器
   toggleShowOrHideGridBtn(true);
-  
-  // 隐藏返回按钮和秒表（初始状态）
-  document.getElementById("back").classList.add("hidden");
   document.getElementById("stopwatch").classList.add("hidden");
 });

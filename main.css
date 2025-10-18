@@ -3,7 +3,7 @@ body {
   max-width: 1200px;
   padding: 30px;
   margin: auto;
-  background-color: #333;
+  background-color: #f5f0e6;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -36,23 +36,22 @@ body {
 
 /* header */
 h1 {
-  color: lightblue;
+  color: #50463c;
   text-align: center;
   margin: 30px auto;
-  text-shadow: 0px 2px 5px rgb(0, 0, 0);
 }
 
 @media (max-width: 768px) {
   h1 {
     margin: 20px auto;
-    font-size: 1.8em;
+    font-size: 2.2em;
   }
 }
 
 @media (max-width: 480px) {
   h1 {
-    margin: 15px auto;
-    font-size: 1.5em;
+    margin: 20px auto;
+    font-size: 2.2em;
   }
 }
 
@@ -62,9 +61,9 @@ h1 {
   padding: 30px;
   margin: 25px auto;
   border-radius: 15px;
-  border: 2px solid lightblue;
   display: grid;
   grid-gap: 20px;
+  background-color: #b4a596;
 }
 
 @media (max-width: 768px) {
@@ -104,9 +103,9 @@ h1 {
   width: 100px;
   height: 100px;
   border-radius: 10px;
-  box-shadow: 0px 2px 5px rgb(0, 0, 0);
-  background-color: lightblue;
-  color: #333;
+  box-shadow:0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #e6d7c3;
+  color: #50463c;
   font-size: 32px;
   font-weight: 500;
   text-align: center;
@@ -117,26 +116,22 @@ h1 {
   transition: transform 0.1s ease;
 }
 
-/* 6x6网格项样式 */
 #grid6 .grid-item {
   width: 80px;
   height: 80px;
   font-size: 24px;
 }
 
-/* 6x6网格间距调整 */
 #grid6 {
   grid-gap: 15px;
 }
 
-/* 7x7网格项样式 */
 #grid7 .grid-item {
   width: 70px;
   height: 70px;
   font-size: 20px;
 }
 
-/* 7x7网格间距调整 */
 #grid7 {
   grid-gap: 12px;
 }
@@ -148,7 +143,6 @@ h1 {
     font-size: 28px;
   }
   
-  /* 6x6网格移动端样式 */
   #grid6 .grid-item {
     width: 60px;
     height: 60px;
@@ -159,7 +153,6 @@ h1 {
     grid-gap: 12px;
   }
   
-  /* 7x7网格移动端样式 */
   #grid7 .grid-item {
     width: 50px;
     height: 50px;
@@ -178,7 +171,6 @@ h1 {
     font-size: 20px;
   }
   
-  /* 6x6网格小屏幕样式 */
   #grid6 .grid-item {
     width: 45px;
     height: 45px;
@@ -189,7 +181,6 @@ h1 {
     grid-gap: 8px;
   }
   
-  /* 7x7网格小屏幕样式 */
   #grid7 .grid-item {
     width: 40px;
     height: 40px;
@@ -208,7 +199,6 @@ h1 {
     font-size: 16px;
   }
   
-  /* 6x6网格超小屏幕样式 */
   #grid6 .grid-item {
     width: 35px;
     height: 35px;
@@ -219,7 +209,6 @@ h1 {
     grid-gap: 6px;
   }
   
-  /* 7x7网格超小屏幕样式 */
   #grid7 .grid-item {
     width: 30px;
     height: 30px;
@@ -263,7 +252,7 @@ h1 {
 #done,
 #stopwatch {
   margin-bottom: 40px;
-  color: lightblue;
+  color: #50463c;
   text-align: center;
   font-size: 24px;
 }
@@ -301,12 +290,11 @@ h1 {
   #next {
     display: block;
     margin: 10px auto;
-    width: 80%;
     text-align: center;
   }
 }
 .btn {
-  color: lightblue;
+  color: #9c8b7a;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #222;
   padding: 20px 30px;
@@ -338,7 +326,7 @@ h1 {
   }
 }
 .btn:hover {
-  color: white;
+  color: #9c8b7a;
 }
 .btn:active {
   background-color: #222;
@@ -355,16 +343,14 @@ h1 {
   
   .grid-item:active {
     transform: scale(0.95);
-    background-color: #87CEEB;
+    background-color: #9c8b7a;
   }
 }
 .hidden {
   display: none !important;
 }
-
-/* footer */
 hr {
-  border-color: lightblue;
+  border-color: #50463c;
   margin: 30px auto;
 }
 #navBars {
@@ -374,16 +360,16 @@ hr {
 }
 
 #gridLabel {
-  color: lightblue;
+  color: #50463c;
   font-size: 18px;
   margin-right: 15px;
   font-weight: 500;
 }
 
 #gridSelector {
-  background-color: #222;
-  color: lightblue;
-  border: 2px solid lightblue;
+  background-color: #e6d7c3;
+  color: #50463c;
+  border: 2px solid #50463c;
   border-radius: 5px;
   padding: 10px 15px;
   font-size: 16px;
@@ -394,19 +380,17 @@ hr {
 }
 
 #gridSelector:hover {
-  background-color: #333;
-  color: white;
+  background-color: #b4a596;
+  color: #50463c;
 }
 
 #gridSelector:focus {
-  border-color: #87CEEB;
-  box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
+  border-color: #b4a596;
 }
 
 #gridSelector option {
-  background-color: #222;
-  color: lightblue;
   padding: 5px;
+  background-color: #e6d7c3;
 }
 
 @media (max-width: 768px) {
