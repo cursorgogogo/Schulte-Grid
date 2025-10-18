@@ -1,7 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   width: 80%;
   max-width: 1200px;
-  padding: 30px;
   margin: auto;
   background-color: #f5f0e6;
   -webkit-tap-highlight-color: transparent;
@@ -15,9 +20,19 @@ body {
 
 @media (max-width: 768px) {
   body {
-    width: 95%;
     padding: 15px;
     overflow-x: hidden;
+  }
+  
+  /* Improve touch targets for mobile */
+  .grid-item {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .btn {
+    min-height: 44px;
+    padding: 12px 20px;
   }
 }
 
@@ -373,7 +388,10 @@ hr {
 .info-section {
   margin: 60px auto;
   max-width: 1200px;
-  padding: 0 20px;
+  background: #f5f0e6;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .info-section h2 {
@@ -532,7 +550,7 @@ hr {
   /* Info section mobile styles */
   .info-section {
     margin: 40px auto;
-    padding: 0 15px;
+    padding: 25px;
   }
   
   .info-section h2 {
@@ -561,6 +579,28 @@ hr {
   .research-section {
     padding: 20px;
   }
+  
+  /* Timer section mobile optimization */
+  #timer-section {
+    margin: 20px auto;
+  }
+  
+  #stopwatch {
+    font-size: 20px;
+  }
+  
+  /* Result section mobile optimization */
+  #result {
+    margin: 30px auto;
+  }
+  
+  #restart,
+  #next {
+    display: block;
+    margin: 15px auto;
+    width: 80%;
+    max-width: 200px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -587,7 +627,7 @@ hr {
   /* Info section small screen styles */
   .info-section {
     margin: 30px auto;
-    padding: 0 10px;
+    padding: 20px;
   }
   
   .info-section h2 {
@@ -610,5 +650,226 @@ hr {
   
   .research-section {
     padding: 15px;
+  }
+  
+  /* Navigation optimization for small screens */
+  #navBars {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  #gridLabel {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  #gridSelector {
+    padding: 8px 12px;
+    font-size: 14px;
+    min-width: 140px;
+  }
+  
+  /* Game area optimization */
+  .grid {
+    padding: 15px;
+    margin: 10px auto;
+    grid-gap: 8px;
+  }
+  
+  /* Timer and result sections */
+  #timer-section {
+    margin: 15px auto;
+  }
+  
+  #stopwatch {
+    font-size: 18px;
+  }
+  
+  #result {
+    margin: 25px auto;
+  }
+  
+  #restart,
+  #next {
+    width: 90%;
+    max-width: 180px;
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+}
+
+/* Extra small devices (phones in landscape mode, small phones) */
+@media (max-width: 360px) {
+  h1 {
+    font-size: 1.8em;
+    margin: 15px auto;
+  }
+  
+  .game-description {
+    font-size: 13px;
+    margin: 10px auto;
+    padding: 0 15px;
+  }
+  
+  /* Grid items for very small screens */
+  .grid-item {
+    width: 45px;
+    height: 45px;
+    font-size: 14px;
+  }
+  
+  #grid6 .grid-item {
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
+  }
+  
+  #grid7 .grid-item {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+  
+  /* Grid spacing for very small screens */
+  .grid {
+    width: 95%;
+    max-width: 500px;
+    padding: 10px;
+    margin: 8px auto;
+    grid-gap: 6px;
+  }
+  
+  #grid6 {
+    grid-gap: 6px;
+  }
+  
+  #grid7 {
+    grid-gap: 4px;
+  }
+  
+  /* Info section for very small screens */
+  .info-section {
+    margin: 20px auto;
+    padding: 15px;
+  }
+  
+  .info-section h2 {
+    font-size: 1.6em;
+    margin-bottom: 20px;
+  }
+  
+  .info-card {
+    padding: 12px;
+  }
+  
+  .info-card h3 {
+    font-size: 1em;
+  }
+  
+  .info-card p,
+  .info-card li {
+    font-size: 12px;
+  }
+  
+  .research-section {
+    padding: 12px;
+  }
+  
+  /* Navigation for very small screens */
+  #navBars {
+    margin: 20px auto;
+  }
+  
+  #gridLabel {
+    font-size: 13px;
+  }
+  
+  #gridSelector {
+    padding: 6px 10px;
+    font-size: 13px;
+    min-width: 120px;
+  }
+  
+  /* Timer and buttons for very small screens */
+  #stopwatch {
+    font-size: 16px;
+  }
+  
+  #restart,
+  #next {
+    width: 95%;
+    max-width: 160px;
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+}
+
+/* Landscape orientation optimization for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+    margin: 10px auto;
+  }
+  
+  .game-description {
+    font-size: 12px;
+    margin: 5px auto;
+  }
+  
+  .info-section {
+    margin: 20px auto;
+    padding: 15px;
+  }
+  
+  .info-section h2 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+  }
+  
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .info-card {
+    padding: 12px;
+  }
+  
+  .info-card h3 {
+    font-size: 1em;
+  }
+  
+  .info-card p,
+  .info-card li {
+    font-size: 11px;
+  }
+  
+  .grid {
+    width: 90%;
+    max-width: 500px;
+    padding: 10px;
+    margin: 5px auto;
+  }
+  
+  #navBars {
+    margin: 15px auto;
+  }
+  
+  #result {
+    margin: 15px auto;
+  }
+  
+  #restart,
+  #next {
+    display: inline-block;
+    margin: 5px 10px;
+    width: auto;
+    padding: 8px 15px;
+    font-size: 12px;
   }
 }
