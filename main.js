@@ -11,7 +11,17 @@ const createGridItems = (gridNum) => {
   for (let i = 0; i < gridNum * gridNum; i++) {
     const gridItem = document.createElement('div');
     gridItem.className = 'grid-item';
+    gridItem.setAttribute('role', 'gridcell');
+    gridItem.setAttribute('tabindex', '0');
+    gridItem.setAttribute('aria-label', `Number ${i + 1} cell`);
     gridItem.onclick = () => clickCell(gridItem, gridNum);
+    // Add keyboard support for accessibility
+    gridItem.onkeydown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        clickCell(gridItem, gridNum);
+      }
+    };
     grid.appendChild(gridItem);
   }
 };
@@ -33,6 +43,7 @@ const setDiffRandomNumToEachCell = (gridNum) => {
   
   for (let i = 0; i < elements.length; i++) {
     elements[i].innerHTML = numbers[i];
+    elements[i].setAttribute('aria-label', `Number ${numbers[i]} cell`);
   }
 };
 
