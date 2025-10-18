@@ -31,7 +31,6 @@ body {
   }
   
   .btn {
-    min-height: 44px;
     padding: 12px 20px;
   }
 }
@@ -144,6 +143,12 @@ h1 {
   flex-direction: column;
   cursor: pointer;
   transition: transform 0.1s ease;
+}
+
+/* PC端点击效果 */
+.grid-item:active {
+  transform: scale(0.95);
+  background-color: #9c8b7a;
 }
 
 #grid6 .grid-item {
@@ -359,10 +364,9 @@ h1 {
   color: #9c8b7a;
 }
 .btn:active {
-  background-color: #222;
-  box-shadow: 0px 0px 2px #111;
-  transform: translateY(10px);
   background-color: #111;
+  box-shadow: 0px 0px 2px #111;
+  transform: translateY(2px) scale(0.98);
 }
 
 @media (max-width: 768px) {
@@ -403,8 +407,8 @@ hr {
 }
 
 .info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 30px;
   margin-bottom: 40px;
 }
@@ -559,7 +563,6 @@ hr {
   }
   
   .info-grid {
-    grid-template-columns: 1fr;
     gap: 20px;
   }
   
@@ -832,7 +835,6 @@ hr {
   }
   
   .info-grid {
-    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
   }
   
