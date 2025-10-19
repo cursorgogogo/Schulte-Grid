@@ -162,16 +162,169 @@ const index = (() => {
 
 // toggle remove class 'hidden'
 const toggleShowOrHideGridBtn = (isShown) => {};
-// toggle 'div#result'
+
+// Modal functions
+const showModal = () => {
+  const modal = document.getElementById("gameModal");
+  const completionTime = document.getElementById("completionTime");
+  const scoreRating = document.getElementById("scoreRating");
+  const scoreReference = document.getElementById("scoreReference");
+  const stopwatch = document.getElementById("stopwatch").textContent;
+  
+  // Set completion time
+  completionTime.textContent = `Completion Time: ${stopwatch}`;
+  
+  // Calculate score and rating
+  const { rating, score, worldRecord } = calculateScore();
+  scoreRating.textContent = score;
+  scoreRating.className = `score-rating ${rating.toLowerCase()}`;
+  
+  // Set score reference
+  scoreReference.innerHTML = getScoreReference();
+  
+  // Show modal with animation
+  modal.classList.remove("hidden");
+  setTimeout(() => {
+    modal.classList.add("show");
+  }, 10);
+  
+  // Prevent body scroll
+  document.body.style.overflow = 'hidden';
+};
+
+// Calculate score based on completion time and grid size
+const calculateScore = () => {
+  let elems = document.getElementsByClassName("grid");
+  let currentGrid = [...elems].find(e => !e.classList.contains("hidden"));
+  const gridSize = parseInt(currentGrid.id.replace("grid", ""));
+  
+  // Parse completion time
+  const timeText = document.getElementById("stopwatch").textContent;
+  const [minutes, seconds] = timeText.split(':').map(s => parseInt(s.trim()));
+  const totalSeconds = minutes * 60 + seconds;
+  
+  // International standards based on cognitive training research and world records
+  const standards = {
+    3: { 
+      excellent: 8,    // World-class level
+      good: 12,        // Advanced level
+      average: 18,     // Intermediate level
+      worldRecord: 4   // World record reference
+    },
+    4: { 
+      excellent: 15,   // World-class level
+      good: 22,        // Advanced level
+      average: 32,     // Intermediate level
+      worldRecord: 8   // World record reference
+    },
+    5: { 
+      excellent: 25,   // World-class level
+      good: 35,        // Advanced level
+      average: 50,     // Intermediate level
+      worldRecord: 15  // World record reference
+    },
+    6: { 
+      excellent: 40,   // World-class level
+      good: 55,        // Advanced level
+      average: 75,     // Intermediate level
+      worldRecord: 25  // World record reference
+    },
+    7: { 
+      excellent: 60,   // World-class level
+      good: 80,        // Advanced level
+      average: 110,    // Intermediate level
+      worldRecord: 40  // World record reference
+    }
+  };
+  
+  const standard = standards[gridSize];
+  let rating, score;
+  
+  if (totalSeconds <= standard.excellent) {
+    rating = "World-Class";
+    score = "🏆 World-Class Performance!";
+  } else if (totalSeconds <= standard.good) {
+    rating = "Advanced";
+    score = "⭐ Advanced Performance!";
+  } else if (totalSeconds <= standard.average) {
+    rating = "Intermediate";
+    score = "👍 Intermediate Performance";
+  } else {
+    rating = "Beginner";
+    score = "💪 Keep Practicing!";
+  }
+  
+  return { rating, score, worldRecord: standard.worldRecord };
+};
+
+// Get score reference for current grid size
+const getScoreReference = () => {
+  let elems = document.getElementsByClassName("grid");
+  let currentGrid = [...elems].find(e => !e.classList.contains("hidden"));
+  const gridSize = parseInt(currentGrid.id.replace("grid", ""));
+  
+  // International performance standards with world record references
+  const references = {
+    3: {
+      worldClass: "&lt;8s",
+      advanced: "8-12s", 
+      intermediate: "12-18s",
+      worldRecord: "~4s"
+    },
+    4: {
+      worldClass: "&lt;15s",
+      advanced: "15-22s",
+      intermediate: "22-32s",
+      worldRecord: "~8s"
+    },
+    5: {
+      worldClass: "&lt;25s",
+      advanced: "25-35s", 
+      intermediate: "35-50s",
+      worldRecord: "~15s"
+    },
+    6: {
+      worldClass: "&lt;40s",
+      advanced: "40-55s",
+      intermediate: "55-75s",
+      worldRecord: "~25s"
+    },
+    7: {
+      worldClass: "&lt;60s",
+      advanced: "60-80s",
+      intermediate: "80-110s",
+      worldRecord: "~40s"
+    }
+  };
+  
+  const ref = references[gridSize];
+  return `
+    <h4>International ${gridSize}x${gridSize} Grid Standards:</h4>
+    <ul>
+      <li><strong>🏆 World-Class:</strong> ${ref.worldClass}</li>
+      <li><strong>⭐ Advanced:</strong> ${ref.advanced}</li>
+      <li><strong>👍 Intermediate:</strong> ${ref.intermediate}</li>
+      <li><strong>🌍 World Record:</strong> ${ref.worldRecord}</li>
+    </ul>
+  `;
+};
+
+const closeModal = () => {
+  const modal = document.getElementById("gameModal");
+  modal.classList.remove("show");
+  
+  setTimeout(() => {
+    modal.classList.add("hidden");
+    document.body.style.overflow = '';
+  }, 300);
+};
+
+// toggle modal display
 const toggleShowOrHide = (isshown) => {
   if (isshown) {
-    document.getElementById("done").classList.remove("hidden");
-    document.getElementById("restart").classList.remove("hidden");
-    document.getElementById("next").classList.remove("hidden");
+    showModal();
   } else {
-    document.getElementById("done").classList.add("hidden");
-    document.getElementById("restart").classList.add("hidden");
-    document.getElementById("next").classList.add("hidden");
+    closeModal();
   }
 };
 const toggleShowOrHideGrids = (isshown) => {};
@@ -185,6 +338,8 @@ const resetStopwatch = () => {
 
 // restart game
 const reset = () => {
+  closeModal();
+  
   let elems = document.getElementsByClassName("grid");
   let currentGrid = [...elems].find(e => !e.classList.contains("hidden"));
   if (currentGrid) {
@@ -196,6 +351,8 @@ const reset = () => {
 
 // next level
 const nextLevel = () => {
+  closeModal();
+  
   let elems = document.getElementsByClassName("grid");
   let currentGrid = [...elems].find(e => !e.classList.contains("hidden"));
   if (currentGrid) {
@@ -203,10 +360,34 @@ const nextLevel = () => {
     const nextGridNum = currentGridNum + 1;
     if (nextGridNum <= 7) {
       showGrid(nextGridNum);
+    } else {
+      // If at max level, restart current level
+      resetGrids(currentGridNum);
+      resetStopwatch();
     }
   }
   resetStopwatch();
 };
+
+// Add keyboard support for modal
+document.addEventListener('keydown', function(e) {
+  const modal = document.getElementById("gameModal");
+  if (!modal.classList.contains("hidden") && !modal.classList.contains("show")) {
+    return;
+  }
+  
+  if (e.key === 'Escape' && !modal.classList.contains("hidden")) {
+    closeModal();
+  }
+});
+
+// Add click outside modal to close
+document.addEventListener('click', function(e) {
+  const modal = document.getElementById("gameModal");
+  if (e.target === modal) {
+    closeModal();
+  }
+});
 
 document.addEventListener('DOMContentLoaded', function() {
   toggleShowOrHideGridBtn(true);

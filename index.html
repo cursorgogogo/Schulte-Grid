@@ -78,12 +78,41 @@
     </select>
   </nav>
 
-  <section id="result" aria-label="Game Results">
-    <div id="done" class="hidden" role="status" aria-live="polite">WELL DONE</div>
-    <div id="restart" class="btn hidden" onclick="reset()" role="button" aria-label="Restart current game">RESTART</div>
-    <div id="next" class="btn hidden" onclick="nextLevel()" role="button" aria-label="Go to next difficulty level">NEXT
-      LEVEL</div>
-  </section>
+  <!-- Game Completion Modal -->
+  <div id="gameModal" class="modal-overlay hidden" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Game Complete!</h2>
+        <div id="completionTime" class="completion-time"></div>
+      </div>
+      <div class="modal-body">
+        <div id="done" role="status" aria-live="polite">🎉 WELL DONE! 🎉</div>
+        <div id="scoreRating" class="score-rating"></div>
+        <div id="scoreReference" class="score-reference"></div>
+        <div class="modal-buttons">
+          <button id="restart" class="modal-btn restart-btn" onclick="reset()" role="button" aria-label="Restart current game">
+            <span class="btn-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 12C4 7.58172 7.58172 4 12 4C14.1217 4 16.0425 4.85842 17.4142 6.24264L15 8.65685H20V3.65685L17.9497 5.70711C16.2161 3.97347 14.2074 3 12 3C6.47715 3 2 7.47715 2 12S6.47715 21 12 21C16.7264 21 20.6222 17.8549 21.4142 13.6569L19.5858 13.3431C18.9561 16.7549 15.7827 19 12 19C7.58172 19 4 15.4183 4 12Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <span class="btn-text">Restart</span>
+          </button>
+          <button id="next" class="modal-btn next-btn" onclick="nextLevel()" role="button" aria-label="Go to next difficulty level">
+            <span class="btn-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.41 8.58997L12 13.17L16.59 8.58997L18 9.99997L12 16L6 9.99997L7.41 8.58997Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <span class="btn-text">Next Level</span>
+          </button>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close modal">
+        <span>&times;</span>
+      </button>
+    </div>
+  </div>
 
   <!-- Game Information Section -->
   <section id="game-info" class="info-section">
