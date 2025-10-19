@@ -14,7 +14,27 @@ const createGridItems = (gridNum) => {
     gridItem.setAttribute('role', 'gridcell');
     gridItem.setAttribute('tabindex', '0');
     gridItem.setAttribute('aria-label', `Number ${i + 1} cell`);
+    
+    // Add click event for desktop
     gridItem.onclick = () => clickCell(gridItem, gridNum);
+    
+    // Add touch events for mobile devices
+    gridItem.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      gridItem.classList.add('touching');
+    }, { passive: false });
+    
+    gridItem.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      gridItem.classList.remove('touching');
+      clickCell(gridItem, gridNum);
+    }, { passive: false });
+    
+    // Prevent context menu on long press
+    gridItem.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+    });
+    
     // Add keyboard support for accessibility
     gridItem.onkeydown = (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
