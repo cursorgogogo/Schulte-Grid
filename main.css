@@ -948,7 +948,7 @@ hr {
   box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
 }
 
-.score-rating.world-class {
+.score-rating.exceptional {
   background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
   color: #333;

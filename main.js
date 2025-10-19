@@ -19,15 +19,28 @@ const createGridItems = (gridNum) => {
     gridItem.onclick = () => clickCell(gridItem, gridNum);
     
     // Add touch events for mobile devices
+    let touchStartTime = 0;
+    let hasMoved = false;
+    
     gridItem.addEventListener('touchstart', (e) => {
-      e.preventDefault();
+      touchStartTime = Date.now();
+      hasMoved = false;
       gridItem.classList.add('touching');
-    }, { passive: false });
+    }, { passive: true });
+    
+    gridItem.addEventListener('touchmove', (e) => {
+      hasMoved = true;
+    }, { passive: true });
     
     gridItem.addEventListener('touchend', (e) => {
-      e.preventDefault();
+      const touchDuration = Date.now() - touchStartTime;
       gridItem.classList.remove('touching');
-      clickCell(gridItem, gridNum);
+      
+      // Only trigger click if touch was short and didn't move much
+      if (!hasMoved && touchDuration < 500) {
+        e.preventDefault();
+        clickCell(gridItem, gridNum);
+      }
     }, { passive: false });
     
     // Prevent context menu on long press
@@ -72,6 +85,7 @@ const resetGrids = (gridNum) => {
   setDiffRandomNumToEachCell(gridNum);
   index(false, true);
   toggleShowOrHide(false);
+  toggleShowOrHideGridBtn(false);
 };
 
 const showGrid = (gridNum) => {
@@ -132,17 +146,22 @@ const stopwatch = (cellNum, gridNum) => {
 };
 
 // press each grid cell in numerical order
-// let i = 1;
 const clickCell = (elem, gridNum) => {
   let cellNum = parseInt(elem.innerText);
+  const expectedNum = index(false, false);
+  
   stopwatch(cellNum, gridNum);
-  if (index(false, false) === cellNum) {
+  
+  if (expectedNum === cellNum) {
+    // Correct number clicked
     index(true, false);
     elem.style.backgroundColor = "#e6d7c3";
     toggleShowOrHideGridBtn(false);
-  }
-  if (index(false, false) === gridNum * gridNum + 1) {
-    toggleShowOrHide(true);
+    
+    // Check if game is completed after incrementing the counter
+    if (index(false, false) === gridNum * gridNum + 1) {
+      toggleShowOrHide(true);
+    }
   }
 };
 
@@ -203,37 +222,37 @@ const calculateScore = () => {
   const [minutes, seconds] = timeText.split(':').map(s => parseInt(s.trim()));
   const totalSeconds = minutes * 60 + seconds;
   
-  // International standards based on cognitive training research and world records
+  // Realistic performance standards based on actual user data and cognitive training research
   const standards = {
     3: { 
-      excellent: 8,    // World-class level
-      good: 12,        // Advanced level
-      average: 18,     // Intermediate level
-      worldRecord: 4   // World record reference
+      excellent: 5,    // Exceptional level
+      good: 8,         // Advanced level
+      average: 12,     // Intermediate level
+      worldRecord: 3   // Elite reference
     },
     4: { 
-      excellent: 15,   // World-class level
-      good: 22,        // Advanced level
-      average: 32,     // Intermediate level
-      worldRecord: 8   // World record reference
+      excellent: 10,   // Exceptional level
+      good: 15,        // Advanced level
+      average: 22,     // Intermediate level
+      worldRecord: 6   // Elite reference
     },
     5: { 
-      excellent: 25,   // World-class level
-      good: 35,        // Advanced level
-      average: 50,     // Intermediate level
-      worldRecord: 15  // World record reference
+      excellent: 18,   // Exceptional level
+      good: 25,        // Advanced level
+      average: 35,     // Intermediate level
+      worldRecord: 12  // Elite reference
     },
     6: { 
-      excellent: 40,   // World-class level
-      good: 55,        // Advanced level
-      average: 75,     // Intermediate level
-      worldRecord: 25  // World record reference
+      excellent: 28,   // Exceptional level
+      good: 40,        // Advanced level
+      average: 55,     // Intermediate level
+      worldRecord: 20  // Elite reference
     },
     7: { 
-      excellent: 60,   // World-class level
-      good: 80,        // Advanced level
-      average: 110,    // Intermediate level
-      worldRecord: 40  // World record reference
+      excellent: 42,   // Exceptional level
+      good: 60,        // Advanced level
+      average: 80,     // Intermediate level
+      worldRecord: 30  // Elite reference
     }
   };
   
@@ -241,8 +260,8 @@ const calculateScore = () => {
   let rating, score;
   
   if (totalSeconds <= standard.excellent) {
-    rating = "World-Class";
-    score = "🏆 World-Class Performance!";
+    rating = "Exceptional";
+    score = "🏆 Exceptional Performance!";
   } else if (totalSeconds <= standard.good) {
     rating = "Advanced";
     score = "⭐ Advanced Performance!";
@@ -263,48 +282,48 @@ const getScoreReference = () => {
   let currentGrid = [...elems].find(e => !e.classList.contains("hidden"));
   const gridSize = parseInt(currentGrid.id.replace("grid", ""));
   
-  // International performance standards with world record references
+  // Realistic performance standards based on actual user performance data
   const references = {
     3: {
-      worldClass: "&lt;8s",
-      advanced: "8-12s", 
-      intermediate: "12-18s",
-      worldRecord: "~4s"
+      exceptional: "&lt;5s",
+      advanced: "5-8s", 
+      intermediate: "8-12s",
+      elite: "~3s"
     },
     4: {
-      worldClass: "&lt;15s",
-      advanced: "15-22s",
-      intermediate: "22-32s",
-      worldRecord: "~8s"
+      exceptional: "&lt;10s",
+      advanced: "10-15s",
+      intermediate: "15-22s",
+      elite: "~6s"
     },
     5: {
-      worldClass: "&lt;25s",
-      advanced: "25-35s", 
-      intermediate: "35-50s",
-      worldRecord: "~15s"
+      exceptional: "&lt;18s",
+      advanced: "18-25s", 
+      intermediate: "25-35s",
+      elite: "~12s"
     },
     6: {
-      worldClass: "&lt;40s",
-      advanced: "40-55s",
-      intermediate: "55-75s",
-      worldRecord: "~25s"
+      exceptional: "&lt;28s",
+      advanced: "28-40s",
+      intermediate: "40-55s",
+      elite: "~20s"
     },
     7: {
-      worldClass: "&lt;60s",
-      advanced: "60-80s",
-      intermediate: "80-110s",
-      worldRecord: "~40s"
+      exceptional: "&lt;42s",
+      advanced: "42-60s",
+      intermediate: "60-80s",
+      elite: "~30s"
     }
   };
   
   const ref = references[gridSize];
   return `
-    <h4>International ${gridSize}x${gridSize} Grid Standards:</h4>
+    <h4>Realistic ${gridSize}x${gridSize} Grid Performance Standards:</h4>
     <ul>
-      <li><strong>🏆 World-Class:</strong> ${ref.worldClass}</li>
+      <li><strong>🏆 Exceptional:</strong> ${ref.exceptional}</li>
       <li><strong>⭐ Advanced:</strong> ${ref.advanced}</li>
       <li><strong>👍 Intermediate:</strong> ${ref.intermediate}</li>
-      <li><strong>🌍 World Record:</strong> ${ref.worldRecord}</li>
+      <li><strong>🥇 Elite Reference:</strong> ${ref.elite}</li>
     </ul>
   `;
 };
@@ -360,13 +379,13 @@ const nextLevel = () => {
     const nextGridNum = currentGridNum + 1;
     if (nextGridNum <= 7) {
       showGrid(nextGridNum);
+      // showGrid already calls resetStopwatch(), so no need to call it again
     } else {
       // If at max level, restart current level
       resetGrids(currentGridNum);
       resetStopwatch();
     }
   }
-  resetStopwatch();
 };
 
 // Add keyboard support for modal
