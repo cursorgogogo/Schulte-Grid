@@ -60,8 +60,8 @@ h1 {
   text-align: center;
   margin: 20px auto;
   max-width: 600px;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.4;
 }
 
 @media (max-width: 768px) {
@@ -71,7 +71,7 @@ h1 {
   }
   
   .game-description {
-    font-size: 18px;
+    font-size: 15px;
     margin: 15px auto;
     padding: 0 20px;
   }
@@ -192,13 +192,13 @@ h1 {
   .grid-item {
     width: 85px;
     height: 85px;
-    font-size: 32px;
+    font-size: 28px;
   }
   
   #grid6 .grid-item {
     width: 65px;
     height: 65px;
-    font-size: 22px;
+    font-size: 18px;
   }
   
   #grid6 {
@@ -208,7 +208,7 @@ h1 {
   #grid7 .grid-item {
     width: 55px;
     height: 55px;
-    font-size: 18px;
+    font-size: 14px;
   }
   
   #grid7 {
@@ -218,15 +218,15 @@ h1 {
 
 @media (max-width: 480px) {
   .grid-item {
-    width: 65px;
-    height: 65px;
-    font-size: 24px;
+    width: 55px;
+    height: 55px;
+    font-size: 20px;
   }
   
   #grid6 .grid-item {
     width: 50px;
     height: 50px;
-    font-size: 18px;
+    font-size: 14px;
   }
   
   #grid6 {
@@ -236,7 +236,7 @@ h1 {
   #grid7 .grid-item {
     width: 45px;
     height: 45px;
-    font-size: 16px;
+    font-size: 12px;
   }
   
   #grid7 {
@@ -248,13 +248,13 @@ h1 {
   .grid-item {
     width: 55px;
     height: 55px;
-    font-size: 20px;
+    font-size: 16px;
   }
   
   #grid6 .grid-item {
     width: 40px;
     height: 40px;
-    font-size: 16px;
+    font-size: 12px;
   }
   
   #grid6 {
@@ -264,7 +264,7 @@ h1 {
   #grid7 .grid-item {
     width: 35px;
     height: 35px;
-    font-size: 14px;
+    font-size: 10px;
   }
   
   #grid7 {
@@ -636,7 +636,7 @@ hr {
   #gridSelector {
     padding: 12px 18px;
     font-size: 16px;
-    min-width: 140px;
+    min-width: 180px;
   }
   
   /* Info section small screen styles */
@@ -680,9 +680,9 @@ hr {
   }
   
   #gridSelector {
-    padding: 8px 12px;
+    padding: 10px 12px;
     font-size: 14px;
-    min-width: 140px;
+    min-width: 180px;
   }
   
   /* Game area optimization */
@@ -729,8 +729,8 @@ hr {
   
   /* Grid items for very small screens */
   .grid-item {
-    width: 45px;
-    height: 45px;
+    width: 42px;
+    height: 42px;
     font-size: 14px;
   }
   
@@ -801,9 +801,9 @@ hr {
   }
   
   #gridSelector {
-    padding: 6px 10px;
+    padding: 8px 10px;
     font-size: 13px;
-    min-width: 120px;
+    min-width: 160px;
   }
   
   /* Timer and buttons for very small screens */
